@@ -1,27 +1,56 @@
-﻿// Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 
-// m = 3, n = 4.
-
-// 0,5 7 -2 -0,2
-
-// 1 -3,3 8 -9,9
-
-// 8 7,8 -7,1 9
-
-Console.WriteLine("Введите количество строк");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите количество столбцов");
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+Console.WriteLine("Введите количество строк: ");
 int n = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов: ");
+int m = Convert.ToInt32(Console.ReadLine());
+int[,] num = new int[n, m];
+FillArrayRandom2(num);
+OutputArray2(num);
+int [] sum  = new int [m];
+float average = 0;
 
-double[,] num = new double[m, n];
-
-for (int i = 0; i < m; i++)
+// Заполнение массива рандомными числами от 1 до 9
+void FillArrayRandom2(int[,] num)
 {
-    for (int j = 0; j < n; j++)
+    for (int i = 0; i < num.GetLength(0); i++)
+    {
+        for (int j = 0; j < num.GetLength(1); j++)
         {
-            num[i,j] = new Random().NextDouble();
-            Console.Write($"{num[i, j]} ");
+            num[i, j] = new Random().Next(1, 10);
         }
-    Console.WriteLine();
     }
+}
+//  Функция вывода массива 
+void OutputArray2(int[,] num)
+{
+    for (int i = 0; i < num.GetLength(0); i++)
+    {
+        for (int j = 0; j < num.GetLength(1); j++)
+        {
+            Console.Write(num[i, j] + " ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
 
+for (int i=0; i<m; i++)
+{
+    for(int j=0; j<n; j++)
+    {
+       sum [i] = sum [i] + num[j, i];
+    }
+}
+for (int i=0; i<m; i++)
+{
+    average = sum [i] / n;
+    Console.Write($"{average} ");
+}
+      
+ Console.ReadLine();
